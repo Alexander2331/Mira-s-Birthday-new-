@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Сюрприз для тебя</title>
+    <style>
+        /* Основные стили */
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Темный фон */
+            overflow-x: hidden;
+            position: relative; /* Для позиционирования узора */
+        }
+
+        /* Узор на фоне */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(135deg, rgba(128, 0, 128, 0.3) 25%, transparent 25%, transparent 75%, rgba(128, 0, 128, 0.3) 75%, rgba(128, 0, 128, 0.3)), linear-gradient(225deg, rgba(128, 0, 128, 0.3) 25%, transparent 25%, transparent 75%, rgba(128, 0, 128, 0.3) 75%, rgba(128, 0, 128, 0.3));
+            background-size: 30px 30px; /* Размер узора */
+            z-index: 0; /* Чтобы узор был на фоне */
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #FF69B4;
+            margin-top: 20px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3);
+            z-index: 1; /* Чтобы заголовок был на переднем плане */
+        }
+
+        /* Поздравление */
+        .greeting {
+            margin: 20px 0; /* Отступы сверху и снизу */
+            text-align: center;
+            font-size: 1.5em;
+            color: #FF1493;
+            max-width: 600px; /* Максимальная ширина текста */
+            padding: 0 20px; /* Отступы по бокам */
+            background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный черный фон */
+            border-radius: 10px; /* Закругленные углы */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative; /* Чтобы текст был выше узора */
+            z-index: 1; /* Чтобы текст был на переднем плане */
+        }
+
+        /* Контейнер для фотографий */
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            z-index: 1; /* Чтобы галерея была на переднем плане */
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            cursor: pointer; /* Курсор указывает, что на изображение можно нажимать */
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Сердечки */
+        .heart {
+            position: fixed;
+            font-size: 32px; /* Увеличенный размер */
+            opacity: 0.8;
+            transform: rotate(45deg);
+            animation: floatUp 4s linear infinite;
+        }
+
+        /* Анимация для сердца */
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0) rotate(45deg); }
+            100% { opacity: 0; transform: translateY(-100vh) rotate(45deg); }
+        }
+
+        /* Сияющее сердце */
+        .shining-heart {
+            font-size: 80px; /* Увеличенный размер */
+            animation: shine 1.5s infinite;
+            color: #FF69B4; /* Цвет сердца */
+            position: relative;
+            z-index: 10; /* Чтобы сердце было на переднем плане */
+            margin: 0 0 20px 0; /* Отступ снизу для расстояния */
+        }
+
+        /* Новый ряд для фотографий */
+        .second-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 50px; /* Увеличенный отступ сверху для нового ряда */
+            position: relative; /* Для управления позиционированием */
+            z-index: 1; /* Чтобы новый ряд был на переднем плане */
+        }
+
+        /* Звездочки и блеск */
+        .star {
+            position: fixed;
+            color: gold;
+            font-size: 20px;
+            opacity: 0.8;
+            z-index: 100; /* Чтобы звезды были на переднем плане */
+            pointer-events: none; /* Чтобы звезды не мешали кликам на фотографии */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>С Днем Рождения! <span>❤️</span></h1>
+
+    <!-- Галерея фотографий -->
+    <div class="photo-gallery">
+        <img src="photo_1.jpg" alt="Фото 1">
+        <img src="photo_2.jpg" alt="Фото 2">
+        <img src="photo_3.jpg" alt="Фото 3">
+        <img src="photo_4.jpg" alt="Фото 4">
+
+        <!-- Сияющее сердце между 4 и 5 фотографией -->
+        <div class="shining-heart">💖</div>
+    </div>
+
+    <!-- Поздравление с сердцем -->
+    <div class="greeting">
+        Пусть каждый день будет ярче предыдущего, пусть улыбка и радость всегда будут главными эмоциями <span class="shining-heart">❤️</span>
+    </div>
+
+    <!-- Новый ряд для оставшихся фотографий -->
+    <div class="second-row">
+        <img src="photo_5.jpg" alt="Фото 5">
+        <img src="photo_6.jpg" alt="Фото 6">
+        <img src="photo_8.jpg" alt="Фото 8">
+    </div>
+
+    <!-- JS для появления звездочек и блеска при нажатии на фотографии -->
+    <script>
+        $(document).on('click', '.photo-gallery img', function(e) {
+            for (let i = 0; i < 15; i++) { // Увеличенное количество звезд
+                const star = $('<div class="star">⭐</div>');
+
+                // Устанавливаем случайное положение для звездочек
+                const xPos = Math.random() * $(window).width(); // Случайное положение по оси X
+                const yPos = Math.random() * $(window).height(); // Случайное положение по оси Y
+                star.css({
+                    left: xPos,
+                    top: yPos,
+                    animation: 'fall 1s forwards'
+                });
+
+                // Добавляем звезду в документ
+                $('body').append(star);
+
+                // Удаляем звезду после анимации
+                setTimeout(() => {
+                    star.remove();
+                }, 1000);
+            }
+        });
+
+        // JS для появления разноцветных сердечек при прокрутке
+        $(document).on('scroll', () => {
+            // Создаем элемент сердца
+            const heart = $('<div class="heart">❤️</div>');
+
+            // Устанавливаем случайный цвет
+            const colors = ['#FF69B4', '#FF4500', '#32CD32', '#1E90FF', '#FFD700', '#FF1493'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            heart.css('color', randomColor);
+
+            // Устанавливаем случайное положение сердца
+            heart.css({
+                'left': `${Math.random() * 100}vw`,
+                'bottom': '0px',
+                'fontSize': `${Math.random() * 20 + 20}px`
+            });
+
+            // Добавляем сердце в документ
+            $('body').append(heart);
+
+            // Удаляем сердце после анимации
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        });
+    </script>
+
+</body>
+</html>
